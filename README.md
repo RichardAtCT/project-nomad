@@ -28,6 +28,24 @@ sudo apt-get update && sudo apt-get install -y curl && curl -fsSL https://raw.gi
 
 Project N.O.M.A.D. is now installed on your device! Open a browser and navigate to `http://localhost:8080` (or `http://DEVICE_IP:8080`) to start exploring!
 
+#### macOS (Intel + Apple Silicon)
+
+> macOS support is community-contributed. Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/) and [Homebrew](https://brew.sh).
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/install_nomad.sh -o install_nomad.sh && bash install_nomad.sh
+```
+
+The script will detect macOS and use the appropriate installer automatically. No `sudo` is needed — N.O.M.A.D. installs to `~/.project-nomad` on macOS.
+
+**Apple Silicon (M1/M2/M3/M4) — AI performance note:**
+Docker cannot access the Metal GPU. For full-speed local AI, install Ollama natively:
+```bash
+brew install ollama && ollama serve
+```
+Then uncomment `OLLAMA_HOST=http://host.docker.internal:11434` in `~/.project-nomad/.env`.
+All other features (Kiwix, Kolibri, maps, CyberChef, FlatNotes) run at full speed.
+
 ### Advanced Installation
 For more control over the installation process, copy and paste the [Docker Compose template](https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/management_compose.yaml) into a `docker-compose.yml` file and customize it to your liking (be sure to replace any placeholders with your actual values). Then, run `docker compose up -d` to start the Command Center and its dependencies. Note: this method is recommended for advanced users only, as it requires familiarity with Docker and manual configuration before starting.
 

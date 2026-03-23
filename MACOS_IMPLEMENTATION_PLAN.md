@@ -256,23 +256,23 @@ All other features (Kiwix, Kolibri, maps, CyberChef, FlatNotes) run natively at 
 
 ## Implementation Order
 
-| # | Task | Effort | File(s) |
-|---|------|--------|---------|
-| 1 | OS detection in existing install script | Small | `install_nomad.sh` |
-| 2 | `install_nomad_macos.sh` — core structure | Medium | new file |
-| 3 | macOS compose file | Medium | new file |
-| 4 | `NOMAD_DIR` parameterisation in helper scripts | Small | `start/stop/update/uninstall_nomad.sh` |
-| 5 | Linux compose: `NOMAD_DIR` env var (non-breaking) | Tiny | `management_compose.yaml` |
-| 6 | README macOS section | Small | `README.md` |
-| 7 | Test on Mac mini M1 (Docker Desktop) | — | — |
-| 8 | Test on Intel Mac (if available) | — | — |
+| # | Task | Effort | File(s) | Status |
+|---|------|--------|---------| ------ |
+| 1 | OS detection in existing install script | Small | `install_nomad.sh` | Done |
+| 2 | `install_nomad_macos.sh` — core structure | Medium | new file | Done |
+| 3 | macOS compose file | Medium | new file | Done |
+| 4 | `NOMAD_DIR` parameterisation in helper scripts | Small | `update/uninstall_nomad.sh` | Done |
+| 5 | Linux compose: `NOMAD_DIR` env var (non-breaking) | Tiny | `management_compose.yaml` | Done |
+| 6 | README macOS section | Small | `README.md` | Done |
+| 7 | Test on Mac mini M1 (Docker Desktop) | — | — | Pending |
+| 8 | Test on Intel Mac (if available) | — | — | Pending |
 
 ---
 
 ## Open Questions (pending upstream response)
 
-- Are `ghcr.io/crosstalk-solutions/project-nomad:*` images published for `linux/arm64`?  
-  → Determines whether we need `platform: linux/amd64` or can go native ARM64
+- ~~Are `ghcr.io/crosstalk-solutions/project-nomad:*` images published for `linux/arm64`?~~
+  → **Answered:** No. CI builds on `ubuntu-latest` only (no buildx/multi-arch). macOS compose uses `platform: linux/amd64` on project images.
 - Does the admin app's `OLLAMA_HOST` config already exist, or does it need app-level changes?  
   → May require a small change inside the Node.js admin app to read the env var
 

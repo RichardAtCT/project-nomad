@@ -551,7 +551,30 @@ success_message() {
 #                                                                                                                                                                                                 #
 ###################################################################################################################################################################################################
 
-# Pre-flight checks
+# Detect OS and route accordingly
+OS="$(uname -s)"
+case "$OS" in
+  Linux*)
+    # Continue with the existing Linux installation below
+    ;;
+  Darwin*)
+    echo -e "${YELLOW}#${RESET} macOS detected. Switching to macOS installer...\\n"
+    SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+    if [[ -f "${SCRIPT_DIR}/install_nomad_macos.sh" ]]; then
+      bash "${SCRIPT_DIR}/install_nomad_macos.sh"
+      exit $?
+    else
+      echo -e "${RED}#${RESET} macOS installer not found. Please ensure install_nomad_macos.sh is in the same directory."
+      exit 1
+    fi
+    ;;
+  *)
+    echo -e "${RED}#${RESET} Unsupported OS: $OS"
+    exit 1
+    ;;
+esac
+
+# Pre-flight checks (Linux only — macOS exits above)
 check_is_debian_based
 check_is_bash
 check_has_sudo
