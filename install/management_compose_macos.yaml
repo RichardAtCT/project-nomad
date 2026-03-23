@@ -112,8 +112,12 @@ services:
       - nomad-update-shared:/shared # Shared volume for communication with admin container
   disk-collector:
     # Disk Collector collects disk usage information and shares it with the admin container for display in the UI.
-    # On macOS, full host filesystem access is not available — the collector uses a fallback that reports
-    # the backing filesystem info via Docker Desktop's filesystem sharing.
+    #
+    # macOS limitation: The Linux version mounts /:/host:ro,rslave to read real host disk info.
+    # This is not compatible with macOS Docker Desktop, so we only mount the storage directory here.
+    # The collector's fallback path reports the Docker VM's backing filesystem info, which means
+    # detailed per-disk/per-partition stats will NOT be available in the UI on macOS — only the
+    # storage volume's filesystem usage will be shown. This is a known macOS limitation.
     image: ghcr.io/crosstalk-solutions/project-nomad-disk-collector:latest
     platform: linux/amd64 # No ARM64 images published yet — remove once multi-arch builds are available
     pull_policy: always

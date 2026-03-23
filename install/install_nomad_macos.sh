@@ -30,11 +30,13 @@ GREEN='\033[1;32m' # Light Green.
 ###################################################################################################################################################################################################
 
 NOMAD_DIR="${NOMAD_DIR:-$HOME/.project-nomad}"
-MANAGEMENT_COMPOSE_FILE_URL="https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/management_compose_macos.yaml"
-START_SCRIPT_URL="https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/start_nomad.sh"
-STOP_SCRIPT_URL="https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/stop_nomad.sh"
-UPDATE_SCRIPT_URL="https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/update_nomad.sh"
-UNINSTALL_SCRIPT_URL="https://raw.githubusercontent.com/Crosstalk-Solutions/project-nomad/refs/heads/main/install/uninstall_nomad.sh"
+# TODO: Before upstreaming, change these URLs back to Crosstalk-Solutions/project-nomad refs/heads/main
+NOMAD_REPO_BASE="https://raw.githubusercontent.com/RichardAtCT/project-nomad/refs/heads/feature/macos-support"
+MANAGEMENT_COMPOSE_FILE_URL="${NOMAD_REPO_BASE}/install/management_compose_macos.yaml"
+START_SCRIPT_URL="${NOMAD_REPO_BASE}/install/start_nomad.sh"
+STOP_SCRIPT_URL="${NOMAD_REPO_BASE}/install/stop_nomad.sh"
+UPDATE_SCRIPT_URL="${NOMAD_REPO_BASE}/install/update_nomad.sh"
+UNINSTALL_SCRIPT_URL="${NOMAD_REPO_BASE}/install/uninstall_nomad.sh"
 script_option_debug='true'
 accepted_terms='false'
 local_ip_address=''
